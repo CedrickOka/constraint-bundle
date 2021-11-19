@@ -8,5 +8,5 @@ namespace Oka\ConstraintBundle\Validator;
  */
 final class EntityExist extends ObjectExist
 {
-    public string $message = 'Entity "%class%" with property "%property%": "%value%" does not exist.';
+    public $message = 'Entity "%class%" with property "%property%": "%value%" does not exist.';
 }
