@@ -1,4 +1,5 @@
 <?php
+
 namespace Oka\ConstraintBundle\Validator;
 
 /**

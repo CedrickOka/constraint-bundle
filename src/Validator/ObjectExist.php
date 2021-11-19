@@ -1,4 +1,5 @@
 <?php
+
 namespace Oka\ConstraintBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
@@ -9,6 +10,6 @@ use Symfony\Component\Validator\Constraint;
 abstract class ObjectExist extends Constraint
 {
     public $message = 'Object "%class%" with property "%property%": "%value%" does not exist.';
-    public string $property = 'id';
+    public $property = 'id';
     public $class;
 }

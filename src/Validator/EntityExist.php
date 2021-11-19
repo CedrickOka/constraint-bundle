@@ -1,9 +1,10 @@
 <?php
+
 namespace Oka\ConstraintBundle\Validator;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
- * 
+ *
  * @Annotation
  */
 final class EntityExist extends ObjectExist
