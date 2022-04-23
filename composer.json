@@ -1,9 +1,9 @@
 {
 	"name" : "coka/constraint-bundle",
 	"type" : "library",
+	"license" : "MIT",
 	"description" : "Validator custom constraint",
 	"homepage" : "https://github.com/CedrickOka/constraint-bundle",
-	"license" : "MIT",
 	"keywords" : [
 		"validator",
 		"constraint"
@@ -15,7 +15,7 @@
 	],
 	"autoload" : {
 		"psr-4" : {
-			"Oka\\ConstraintBundle\\" : "src"
+			"Oka\\ConstraintBundle\\" : "src/"
 		},
 		"exclude-from-classmap" : [
 			"/tests/"
@@ -34,18 +34,22 @@
 		"symfony/validator" : "^3.4 || ^4.4 || ^5.4 || ^6.0"
 	},
 	"require-dev" : {
-		"doctrine/mongodb-odm-bundle": "^4.3",
+		"doctrine/mongodb-odm-bundle" : "^4.3",
 		"doctrine/orm" : "^2.10",
-		"symfony/framework-bundle": "^4.4 || ^5.4",
-		"symfony/phpunit-bridge": "^4.4 || ^5.4",
-		"symfony/yaml": "^4.4 || ^5.4"
+		"friendsofphp/php-cs-fixer" : "^3",
+		"symfony/framework-bundle" : "^4.4 || ^5.4",
+		"symfony/phpunit-bridge" : "^4.4 || ^5.4",
+		"symfony/yaml" : "^4.4 || ^5.4"
 	},
-	"suggests": {
-		"doctrine/mongodb-odm-bundle": "^4.3",
+	"suggests" : {
+		"doctrine/mongodb-odm-bundle" : "^4.3",
 		"doctrine/orm" : "^2.10"
 	},
 	"config" : {
 		"sort-packages" : true
+	},
+	"scripts" : {
+		"php-cs-fixer" : "php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --stop-on-violation --using-cache=no"
 	},
 	"extra" : {
 		"branch-alias" : {
