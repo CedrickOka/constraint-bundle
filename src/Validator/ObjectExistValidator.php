@@ -2,12 +2,12 @@
 
 namespace Oka\ConstraintBundle\Validator;
 
-use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Validator\Exception\LogicException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Exception\LogicException;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
@@ -53,7 +53,7 @@ abstract class ObjectExistValidator extends ConstraintValidator
 
         if (null === $this->objectManager->getRepository($constraint->class)->findOneBy([$constraint->property => $value])) {
             $this->context->buildViolation($constraint->message)
-                          ->setParameter('%class%', $constraint->class)
+                          ->setParameter('%class%', (new \ReflectionClass($constraint->class))->getShortName())
                           ->setParameter('%property%', $constraint->property)
                           ->setParameter('%value%', (string) $value)
                           ->addViolation();
