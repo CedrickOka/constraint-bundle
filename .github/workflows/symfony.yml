@@ -70,7 +70,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-            composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist ${{ matrix.composer_extra_args }};
+            composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist ${{ matrix.composer_extra_args }};
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
