@@ -24,7 +24,7 @@ abstract class ObjectExistValidator extends ConstraintValidator
         $this->objectManager = $objectManager;
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof ObjectExist) {
             throw new UnexpectedTypeException($constraint, ObjectExist::class);
