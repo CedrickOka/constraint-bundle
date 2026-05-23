@@ -3,8 +3,8 @@
 namespace Oka\ConstraintBundle;
 
 use Oka\ConstraintBundle\DependencyInjection\Compiler\ObjectExistValidatorPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -17,7 +17,7 @@ class OkaConstraintBundle extends Bundle
         return \dirname(__DIR__);
     }
 
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

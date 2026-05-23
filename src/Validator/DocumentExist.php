@@ -7,6 +7,7 @@ namespace Oka\ConstraintBundle\Validator;
  *
  * @Annotation
  */
+#[\Attribute()]
 final class DocumentExist extends ObjectExist
 {
     public $message = 'Document "%class%" with field "%property%": "%value%" does not exist.';

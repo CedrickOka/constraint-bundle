@@ -14,17 +14,17 @@ abstract class ObjectExist extends Constraint
     public $class;
 
     /**
-     * @see \Symfony\Component\Validator\Constraint::getDefaultOption()
+     * @see Constraint::getDefaultOption()
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): string
     {
         return 'class';
     }
 
     /**
-     * @see \Symfony\Component\Validator\Constraint::getRequiredOptions()
+     * @see Constraint::getRequiredOptions()
      */
-    public function getRequiredOptions()
+    public function getRequiredOptions(): array
     {
         return ['class'];
     }
