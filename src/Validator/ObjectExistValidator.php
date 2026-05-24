@@ -2,6 +2,8 @@
 
 namespace Oka\ConstraintBundle\Validator;
 
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
@@ -14,10 +16,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  */
 abstract class ObjectExistValidator extends ConstraintValidator
 {
-    /**
-     * @var ObjectManager
-     */
-    protected $objectManager;
+    protected ?ObjectManager $objectManager;
 
     public function __construct(ObjectManager $objectManager)
     {
@@ -51,12 +50,26 @@ abstract class ObjectExistValidator extends ConstraintValidator
             $value = $propertyAccessor->getValue($value, $propertyPath);
         }
 
-        if (null === $this->objectManager->getRepository($constraint->class)->findOneBy([$constraint->property => $value])) {
-            $this->context->buildViolation($constraint->message)
-                          ->setParameter('%class%', (new \ReflectionClass($constraint->class))->getShortName())
-                          ->setParameter('%property%', $constraint->property)
-                          ->setParameter('%value%', (string) $value)
-                          ->addViolation();
+        /** @var ClassMetadata $classMetadata */
+        $classMetadata = $this->objectManager->getClassMetadata($constraint->class);
+        /** @var EntityRepository $repository */
+        $repository = $this->objectManager->getRepository($constraint->class);
+
+        if (true === $classMetadata->isIdentifier($constraint->property)) {
+            if ($this->objectManager->getRepository($constraint->class)->find($value)) {
+                return;
+            }
         }
+
+        if (0 < $repository->count([$constraint->property => $value])) {
+            return;
+        }
+
+        $this->context
+            ->buildViolation($constraint->message)
+            ->setParameter('%class%', (new \ReflectionClass($constraint->class))->getShortName())
+            ->setParameter('%property%', $constraint->property)
+            ->setParameter('%value%', (string) $value)
+            ->addViolation();
     }
 }

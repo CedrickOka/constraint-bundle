@@ -2,10 +2,12 @@
 
 namespace Oka\ConstraintBundle\Validator;
 
+use Doctrine\Common\Annotations\Annotation;
+
 /**
  * @author Cedrick Oka Baidai <okacedrick@gmail.com>
  *
- * @Annotation
+ * @Annotation()
  */
 #[\Attribute()]
 final class EntityExist extends ObjectExist
