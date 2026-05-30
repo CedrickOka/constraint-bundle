@@ -9,9 +9,29 @@ use Symfony\Component\Validator\Constraint;
  */
 abstract class ObjectExist extends Constraint
 {
-    public $message = 'Object "%class%" with property "%property%": "%value%" does not exist.';
-    public $property = 'id';
     public $class;
+    public $property = 'id';
+    public $message = 'Object "%class%" with property "%property%": "%value%" does not exist.';
+
+    public function __construct(
+        $class,
+        ?string $property = null,
+        ?string $message = null,
+        ?array $groups = null,
+        $payload = null,
+        array $options = [],
+    ) {
+        if (\is_array($class)) {
+            $options = array_merge($class, $options);
+        } elseif (null !== $class) {
+            $options['class'] = $class;
+        }
+
+        parent::__construct($options, $groups, $payload);
+
+        $this->property = $property ?? $this->property;
+        $this->message = $message ?? $this->message;
+    }
 
     /**
      * @see Constraint::getDefaultOption()
